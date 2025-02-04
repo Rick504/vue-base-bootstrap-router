@@ -1,0 +1,29 @@
+@import './base.css';
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+footer,
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 8vh;
+}
+
+header {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .1);
+}
+
+footer {
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+footer small {
+  text-transform: uppercase;
+}
+
