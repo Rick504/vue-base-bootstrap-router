@@ -1,48 +1,44 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
-
-const routesConfig = [
-  {
-    prefix: '/carros',
-    routes: [
-      {
-        path: 'bmw',
-        name: 'bwm',
-        component: () => import('../views/carros/Bmw.vue'),
-      },
-      {
-        path: 'bmw-black',
-        name: 'bmw-black',
-        component: () => import('../views/carros/BmwBlack.vue'),
-      },
-    ],
-  },
-  {
-    prefix: '/motos',
-    routes: [
-      {
-        path: 'cg-160',
-        name: 'cg-160',
-        component: () => import('../views/motos/Cg160.vue'),
-      },
-      {
-        path: 'biz-125',
-        name: 'biz-125',
-        component: () => import('../views/motos/Biz125.vue'),
-      },
-    ],
-  },
-];
+import DashboardView from '../views/DashboardView.vue';
+import LoginView from '../views/LoginView.vue';
+import TableTickets from '../views/chat/TableTickets.vue';
+import MessagesView from '@/views/chat/messages/MessagesView.vue';
+import useAuth from '../middleware/auth';
 
 const routes = [
-  { path: '/', name: 'home', component: HomeView },
-  ...routesConfig.flatMap((group) =>
-    group.routes.map((route) => ({
-      path: `${group.prefix}/${route.path}`,
-      name: route.name,
-      component: route.component,
-    }))
-  ),
+  {
+    path: '/login',
+    name: 'Login',
+    component: LoginView,
+  },
+  {
+    path: '/',
+    name: 'Dashboard',
+    component: DashboardView,
+    beforeEnter: (to, from, next) => {
+        useAuth()
+        next()
+      },
+  },
+  {
+    path: '/messages',
+    name: 'Message',
+    component: TableTickets,
+    beforeEnter: (to, from, next) => {
+        useAuth()
+        next()
+      },
+  },
+  {
+      path: '/support-chat-messages/:id',
+      name: 'MessagesView',
+      component: MessagesView,
+      props: true,
+      beforeEnter: (to, from, next) => {
+        useAuth()
+        next()
+      },
+  }
 ];
 
 const router = createRouter({

@@ -1,3 +1,13 @@
 :root {
-  --vt-c-white: #ffffff;
+  --white: #ffffff;
+  --green: #5e9259;
+  --bg-home: #e2e2e2;
 }
+
+#app {
+  background-color: var(--bg-home) !important;
+  color: var(--green) !important;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  height: 100vh;
+}
+
